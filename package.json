@@ -9,8 +9,6 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "@next/swc-wasm-nodejs": "^16.4.6",
-    "@next/swc-win32-x64-msvc": "^15.5.29",
     "@supabase/ssr": "^0.12.7",
     "@supabase/supabase-js": "^2.119.0",
     "cheerio": "^1.2.0",
