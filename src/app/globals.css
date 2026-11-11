@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-serif: 'Cormorant Garamond', 'Cinzel', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+:root {
+  /* Kora & Pital (Light Mode) */
+  --canvas-bg: #F8F3EA;
+  --card-surface: #F1E9DC;
+  --card-surface-soft: #FAF6F0;
+  --border-muted: #D9CEBC;
+  --border-brass: #C5A059;
+  --text-primary: #241C18;
+  --text-muted: #73675C;
+  --accent-heritage: #A84B2C;
+  --accent-terracotta: #A84B2C;
+  --pill-bg: #EAE1D2;
+}
+
+.dark {
+  /* Sheesham & Raat (Dark Mode) */
+  --canvas-bg: #14100E;
+  --card-surface: #1E1714;
+  --card-surface-soft: #261E1A;
+  --border-muted: #332722;
+  --border-secondary: #3D302A;
+  --border-brass: #C5A059;
+  --text-primary: #ECE4D8;
+  --text-muted: #A89B91;
+  --accent-heritage: #C5A059;
+  --accent-terracotta: #C5A059;
+  --pill-bg: #261E1A;
+}
+
+body {
+  background-color: var(--canvas-bg);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  min-height: 100vh;
+}
