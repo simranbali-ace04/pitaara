@@ -1,4 +1,5 @@
 // Background Service Worker for Pitaara Web Clipper
+// MUST NOT perform any network requests (fetch). Only forwards capture command to active tab.
 
 function sendCaptureMessage(tabId) {
   if (!tabId) return;
@@ -19,7 +20,6 @@ function sendCaptureMessage(tabId) {
             },
             () => {
               chrome.tabs.sendMessage(tabId, { action: 'pitaara-capture' }, () => {
-                // Ignore any final silent error on restricted browser pages (chrome://, etc.)
                 if (chrome.runtime.lastError) {
                   console.debug('Script injection not permitted on this URL');
                 }
@@ -32,16 +32,20 @@ function sendCaptureMessage(tabId) {
   });
 }
 
-// 1. Triggered when user clicks the extension toolbar action icon
+// 1. Extension toolbar action click
 chrome.action.onClicked.addListener((tab) => {
   if (tab?.id) {
     sendCaptureMessage(tab.id);
   }
 });
 
-// 2. Triggered when user presses the Alt+S shortcut command
+// 2. Alt+S shortcut command forwarder
 chrome.commands.onCommand.addListener((command) => {
-  if (command === '_execute_action') {
+  if (
+    command === 'pitaara-capture' ||
+    command === 'capture-artifact' ||
+    command === '_execute_action'
+  ) {
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
       if (tabs[0]?.id) {
         sendCaptureMessage(tabs[0].id);
